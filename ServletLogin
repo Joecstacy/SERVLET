@@ -1,0 +1,99 @@
+#WE NEED 3 FILES FOR RUNNING A SERVLET PROGRAM
+1. LOGIN.HTML
+2. LOGINSERVLET.JAVA
+3. WEB.XML
+
+# LOGIN.HTML
+<!DOCTYPE html>
+<html><head>
+<title>this is my loging page</title>
+<style>
+body {
+	background-color:lightblue;
+	}
+h1 {color:whilte; text-align:center;}
+p {font-family:verdana; font-size:20px; color: red;}
+</style>
+</head>
+<body>
+<h1> JTC STUDENT LOGIN</h1>
+<hr/><br>
+<form action="test.jtc" method="post">
+User Name <input type="text" name="uname"><br><br>
+User User ID   <input type="number" name="uid">
+
+<hr><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+# LOGINSERVLET.JAVA
+package com.jtcindia.servlets;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class LoginServlet extends HttpServlet{
+	
+	String name;
+	String uid;
+	
+	public void init(ServletConfig sc) {
+		System.out.println("Test-Servlet-init()");
+	// 1.config  parameter
+		name=sc.getInitParameter("name");
+		uid=sc.getInitParameter("uid");
+	//2.context parameter
+		ServletContext ctx=sc.getServletContext();
+		
+	}
+	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		System.out.println("Test-Servlet-service()");
+		//3.request parameter
+		String un=req.getParameter("uname");
+		String uidd=req.getParameter("uid");
+		//4. Display parameter
+	PrintWriter out=res.getWriter();
+	out.println("<h1>Username: "+un+"</h1>");
+	out.println("<h1>User ID : "+uidd+"</h1>");
+	out.print("<body background-color:powderblue>");
+	out.println("<marquee color: red direction: up> <br><br> YO YOU HAVE DONE IT !!!! </marquee>");
+
+	}
+	public void destroy() {
+		System.out.println("TestServlet-destroy()");
+			
+	}	
+	}
+
+3. WEB.XML
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Jtc1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+      <welcome-file>login.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  <servlet-name>login</servlet-name>
+  <servlet-class>com.jtcindia.servlets.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>login</servlet-name>
+  <url-pattern>/test.jtc</url-pattern>
+  </servlet-mapping>
+</web-app>
