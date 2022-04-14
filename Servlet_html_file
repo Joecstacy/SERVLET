@@ -1,0 +1,26 @@
+#THIS IS THE HTML FILE.
+
+<!DOCTYPE html>
+<html><head>
+<title>this is my loging page</title>
+<style>
+body {
+	background-color:lightblue;
+	}
+h1 {color:whilte; text-align:center;}
+p {font-family:verdana; font-size:20px; color: red;}
+</style>
+</head>
+<body>
+<h1> JTC STUDENT LOGIN</h1>
+<hr/><br>
+<form action="test.jtc" method="post">
+User Name <input type="text" name="uname"><br><br>
+User User ID   <input type="number" name="uid">
+
+<hr><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
